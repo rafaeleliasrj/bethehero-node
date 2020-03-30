@@ -16,7 +16,8 @@ module.exports = {
                 'ongs.city',
                 'ongs.uf'
             ]);
-        response.header('X-Total-Count', count['count(`id`)']);
+            console.log(count)
+        response.header('X-Total-Count', count['count']);
         return response.json(incidents);
     },
     async create(request, response) {
