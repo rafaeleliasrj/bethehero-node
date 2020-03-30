@@ -1,6 +1,3 @@
-var pg = require('pg');
-pg.defaults.ssl = true;
-
 module.exports = {
 
   development: {

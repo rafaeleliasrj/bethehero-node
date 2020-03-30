@@ -4,7 +4,8 @@
   "description": "Projeto de Be To Hero da Semana OminiStack 11 da Rccketseat",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --inspect src/index.js"
+    "dev": "nodemon --inspect src/index.js",
+    "start": "node src/index.js"
   },
   "author": "",
   "license": "ISC",
