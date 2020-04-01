@@ -4,21 +4,21 @@ const bcrypt = require('bcryptjs');
 
 module.exports = {
     async index(request, response) {
-        const ongs = await connection('ongs').select('*');
-        return response.json(ongs);
+        const users = await connection('users').select('*');
+        return response.json(users);
     },
     async create(request, response) {
         try {
             const { name, email, password, whatsapp, city, uf } = request.body;
-            const ong = await connection('ongs')
+            const user = await connection('users')
                 .where('email', email)
                 .first();
-            if (ong) {
-                return res.status(400).json({ message: "ONG already exists" });
+            if (user) {
+                return res.status(400).json({ message: "User already exists" });
             }
             const id = crypto.randomBytes(4).toString('HEX');
             const hashPassword = await bcrypt.hash(password, 8);
-            await connection('ongs').insert({
+            await connection('users').insert({
                 id,
                 name,
                 email,
@@ -30,7 +30,7 @@ module.exports = {
 
             return response.json({ id });
         } catch (err) {
-            return response.status(400).json({ message: "ONG registration failed" });
+            return response.status(400).json({ message: "User registration failed" });
         }
     }
 };

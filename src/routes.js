@@ -1,14 +1,22 @@
 const express = require('express');
+const authMiddleware = require("../src/middlewares/auth");
 const OngController = require('./controllers/OngController');
+const UserController = require('./controllers/UserController');
 const IncidentController = require('./controllers/IncidentController');
 const ProfileController = require('./controllers/ProfileController');
 const SessionController = require('./controllers/SessionController');
 const routes = express.Router();
 
+routes.post('/sessions/ong', SessionController.loginOng);
+routes.post('/sessions/user', SessionController.loginUser);
+
+routes.use(authMiddleware);
+
 routes.get('/ongs', OngController.index);
 routes.post('/ongs', OngController.create);
 
-routes.post('/sessions', SessionController.create);
+routes.get('/users', UserController.index);
+routes.post('/users', UserController.create);
 
 routes.get('/profile', ProfileController.index); 
 

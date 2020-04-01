@@ -6,7 +6,7 @@ module.exports = {
         return bcrypt.compare(hash, password);
     },
     generateToken: function (id) {
-        return jwt.sign({ id }, "secret", {
+        return 'Bearer ' + jwt.sign({ id }, "secret", {
             expiresIn: 86400
         });
     }
