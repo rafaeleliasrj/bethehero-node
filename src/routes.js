@@ -10,13 +10,14 @@ const routes = express.Router();
 routes.post('/sessions/ong', SessionController.loginOng);
 routes.post('/sessions/user', SessionController.loginUser);
 
+routes.post('/ongs', OngController.create);
+routes.post('/users', UserController.create);
+
 routes.use(authMiddleware);
 
 routes.get('/ongs', OngController.index);
-routes.post('/ongs', OngController.create);
 
 routes.get('/users', UserController.index);
-routes.post('/users', UserController.create);
 
 routes.get('/profile', ProfileController.index); 
 

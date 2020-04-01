@@ -28,14 +28,14 @@ module.exports = {
     },
     async loginUser(request, response) {
         try {
-            const { id, password } = request.body;
+            const { login, password } = request.body;
 
-            const ong = await connection('ongs')
-                .where('id', id)
+            const user = await connection('users')
+                .where('email', login)
                 .first();
 
-            if (!ong) {
-                return response.status(400).json({ message: "ONG not found" });
+            if (!user) {
+                return response.status(400).json({ message: "User not found" });
             }
 
             if (!(await auth.compareHash(password, ong.password))) {
@@ -43,11 +43,11 @@ module.exports = {
             }
 
             return response.json({
-                ong,
-                token: auth.generateToken(ong.id)
+                user,
+                token: auth.generateToken(user.id)
             });
         } catch (err) {
-            return response.status(400).json({ message: "ONG authentication failed" });
+            return response.status(400).json({ message: "User authentication failed" });
         }
     }
 }
