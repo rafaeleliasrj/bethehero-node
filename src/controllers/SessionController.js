@@ -28,17 +28,17 @@ module.exports = {
     },
     async loginUser(request, response) {
         try {
-            const { login, password } = request.body;
+            const { email, password } = request.body;
 
             const user = await connection('users')
-                .where('email', login)
+                .where('email', email)
                 .first();
 
             if (!user) {
                 return response.status(400).json({ message: "User not found" });
             }
 
-            if (!(await auth.compareHash(password, ong.password))) {
+            if (!(await auth.compareHash(password, user.password))) {
                 return response.status(400).json({ message: "Invalid password" });
             }
 

@@ -20,9 +20,6 @@ module.exports = {
         return response.json(incidents);
     },
     async create(request, response) {
-        // if (!request.headers.authorization) {
-        //     return response.status(401).json({ message: 'Operation not permitted' })
-        // }
 
         const { title, description, value } = request.body;
 

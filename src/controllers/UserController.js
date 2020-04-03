@@ -9,12 +9,12 @@ module.exports = {
     },
     async create(request, response) {
         try {
-            const { name, email, password, whatsapp, city, uf } = request.body;
+            const { name, email, password, phone, city, uf } = request.body;
             const user = await connection('users')
                 .where('email', email)
                 .first();
             if (user) {
-                return res.status(400).json({ message: "User already exists" });
+                return response.status(400).json({ message: "User already exists" });
             }
             const id = crypto.randomBytes(4).toString('HEX');
             const hashPassword = await bcrypt.hash(password, 8);
@@ -23,7 +23,7 @@ module.exports = {
                 name,
                 email,
                 password: hashPassword,
-                whatsapp,
+                phone,
                 city,
                 uf
             });

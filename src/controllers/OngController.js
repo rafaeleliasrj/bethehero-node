@@ -14,7 +14,7 @@ module.exports = {
                 .where('email', email)
                 .first();
             if (ong) {
-                return res.status(400).json({ message: "ONG already exists" });
+                return response.status(400).json({ message: "ONG already exists" });
             }
             const id = crypto.randomBytes(4).toString('HEX');
             const hashPassword = await bcrypt.hash(password, 8);
